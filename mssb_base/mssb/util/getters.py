@@ -3,13 +3,13 @@ import json
 import xml.etree.ElementTree as ET
 
 
-def get_connected_sim(slot_terminal):
+def get_connected_sim(mssb_ip, mssb_serial, slot_terminal):
     """
     This method returns the SIM Card allocated to the provided slot
     :param slot_terminal: int MSSB terminal port assigned to the slot
     :return: returns a dict with SIM attribs (id, name, custom_1 (IMSI), custom_2 (PLMN)
     """
-    sim = get_all_connected_sims().get(int(slot_terminal))
+    sim = get_all_connected_sims(mssb_ip, mssb_serial).get(int(slot_terminal))
     return sim
 
 
@@ -35,12 +35,12 @@ def get_sims_info(repos_dir, mssb_serial, mssb_file_dir):
     :param mssb_file_dir: The directory with the mssb file
     :return: dict with the SIMs Config
     """
-    # Download latest file available
     file = f"{repos_dir}/{mssb_serial}_sims.json"
-    #r = requests.get(constants.MSSB_SIMS_CONFIG_PATH[mssb_serial])
     mssb_file = f"{mssb_file_dir}/{mssb_serial}"
     with open(file, 'wb') as f:
         f.write(mssb_file.content)
     with open(file) as json_file:
         data = json.load(json_file)
     return data
+
+    

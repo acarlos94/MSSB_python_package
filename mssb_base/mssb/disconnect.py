@@ -10,7 +10,7 @@ def disconnect_sim(mssb_ip, mssb_serial, slot_terminal):
     :return: returns whether the operation succeeded or not
     :rtype: bool
     """
-    if get_connected_sim(int(slot_terminal)).get('id') == "":
+    if get_connected_sim(mssb_ip, mssb_serial, int(slot_terminal)).get('id') == "":
         return True
     response = requests.get(f"http://{mssb_ip}/rest.php?command=disconnect&sim=0&terminal={str(slot_terminal)}&mssbSerial={mssb_serial}")
     response_xml = ET.fromstring(response.content)
