@@ -1,6 +1,6 @@
 import requests
 import xml.etree.ElementTree as ET
-from util.getters import get_connected_sim, get_sims_info
+from .util.getters import get_connected_sim, get_sims_info
 
 
 def connect_sim(mssb_ip, mssb_serial, 
